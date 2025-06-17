@@ -343,7 +343,7 @@
             <span class="close-btn" id="closeIframeModal">&times;</span>
             <iframe id="iframeContent" src="" width="100%" height="400px" style="border:none;"></iframe>
         </div>
-       <div class="overlay" id="iframeOverlay" style="display: none;"></div>
+        <div class="overlay" id="iframeOverlay" style="display: none;"></div>
 
         <div class="info-icon-trigger" id="infoIcon">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-info-circle"
@@ -418,69 +418,63 @@
         });
 
         // Agenda Modal
-        const agendaTrigger = document.getElementById('agendaTrigger');
-        const agendaModal = document.getElementById('agendaModal');
-        const agendaOverlay = document.getElementById('agendaOverlay');
-        const closeAgendaModal = document.getElementById('closeAgendaModal');
-        const buatBaruAgenda = document.getElementById('buatBaruAgenda');
-        const cariRekomendasiAgenda = document.getElementById('cariRekomendasiAgenda');
+        document.addEventListener('DOMContentLoaded', () => {
+            const agendaTrigger = document.getElementById('agendaTrigger');
+            const agendaModal = document.getElementById('agendaModal');
+            const agendaOverlay = document.getElementById('agendaOverlay');
+            const closeAgendaModal = document.getElementById('closeAgendaModal');
+            const buatBaruAgenda = document.getElementById('buatBaruAgenda');
+            const cariRekomendasiAgenda = document.getElementById('cariRekomendasiAgenda');
 
-        agendaTrigger.addEventListener('click', (e) => {
-            e.preventDefault();
-            agendaModal.style.display = 'block';
-            agendaOverlay.style.display = 'block';
-            document.body.style.overflow = 'hidden';
-        });
-
-        closeAgendaModal.addEventListener('click', () => {
-            agendaModal.style.display = 'none';
-            agendaOverlay.style.display = 'none';
-            document.body.style.overflow = 'auto';
-        });
-
-        agendaOverlay.addEventListener('click', () => {
-            agendaModal.style.display = 'none';
-            agendaOverlay.style.display = 'none';
-            document.body.style.overflow = 'auto';
-        });
-
-        buatBaruAgenda.addEventListener('click', () => {
-            agendaModal.style.display = 'none';
-            agendaOverlay.style.display = 'none';
-            document.getElementById('iframeContent').src = "http://127.0.0.1:5500/agenda1.html";
-
-            document.getElementById('iframeModal').style.display = 'block';
-            document.getElementById('iframeOverlay').style.display = 'block';
-            document.body.style.overflow = 'hidden';
-            closeIframeModal.addEventListener('click', () => {
-                iframeModal.style.display = 'none';
-                iframeOverlay.style.display = 'none';
-                document.body.style.overflow = 'auto';
-            });
-
-            iframeOverlay.addEventListener('click', () => {
-                iframeModal.style.display = 'none';
-                iframeOverlay.style.display = 'none';
-                document.body.style.overflow = 'auto';
-            });
-        });
-
-        cariRekomendasiAgenda.addEventListener('click', () => {
-            agendaModal.style.display = 'none';
-            agendaOverlay.style.display = 'none';
-
-            // Munculkan overlay putih
-            document.getElementById('iframeOverlay').style.display = 'block';
-
-            // Ganti isi iframe
-            document.getElementById('iframeContent').src = "agenda.html";
-
-            // Munculkan modal iframe
-            document.getElementById('iframeModal').style.display = 'block';
-            const closeIframeModal = document.getElementById('closeIframeModal');
-            const iframeModal = document.getElementById('iframeModal');
+            const iframeModal = document.getElementById('iframeModal1');
             const iframeOverlay = document.getElementById('iframeOverlay');
+            const closeIframeModal = document.getElementById('closeIframeModal');
+            const iframeContent = document.getElementById('iframeContent');
 
+            // Buka modal agenda
+            agendaTrigger.addEventListener('click', (e) => {
+                e.preventDefault();
+                agendaModal.style.display = 'block';
+                agendaOverlay.style.display = 'block';
+                document.body.style.overflow = 'hidden';
+            });
+
+            // Tutup modal agenda
+            closeAgendaModal.addEventListener('click', () => {
+                agendaModal.style.display = 'none';
+                agendaOverlay.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            });
+
+            agendaOverlay.addEventListener('click', () => {
+                agendaModal.style.display = 'none';
+                agendaOverlay.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            });
+
+            // Tombol "Destinasi Baru"
+            buatBaruAgenda.addEventListener('click', () => {
+                // Hilangkan modal jika masih terbuka
+                agendaModal.style.display = 'none';
+                agendaOverlay.style.display = 'none';
+                document.body.style.overflow = 'auto';
+
+                // Redirect ke halaman baru
+                window.location.href = "home1.html";
+            });
+
+
+            // Tombol "Rekomendasi"
+            cariRekomendasiAgenda.addEventListener('click', () => {
+                agendaModal.style.display = 'none';
+                agendaOverlay.style.display = 'none';
+                iframeContent.src = "agenda.html"; // Ganti sesuai file kamu
+                iframeModal.style.display = 'block';
+                iframeOverlay.style.display = 'block';
+                document.body.style.overflow = 'hidden';
+            });
+
+            // Tombol ❌ tutup iframe modal
             closeIframeModal.addEventListener('click', () => {
                 iframeModal.style.display = 'none';
                 iframeOverlay.style.display = 'none';
@@ -492,8 +486,6 @@
                 iframeOverlay.style.display = 'none';
                 document.body.style.overflow = 'auto';
             });
-            // Hilangkan scroll dan cegah klik latar
-            document.body.style.overflow = 'hidden';
         });
 
     </script>
