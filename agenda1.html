@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Form Data Wisata</title>
+    <script type="module">
+        // Import SDK
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+        import { getDatabase, ref, push, set } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+        import { getStorage, ref as storageRef, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-storage.js";
+
+        // Konfigurasi Firebase
+        const firebaseConfig = {
+            apiKey: "AIzaSyAfPsAf-T24KLuyKGPQ1pyYUc0Vs-OEv90",
+            authDomain: "tilik-banua.firebaseapp.com",
+            databaseURL: "https://tilik-banua-default-rtdb.firebaseio.com",
+            projectId: "tilik-banua",
+            storageBucket: "tilik-banua.appspot.com",
+            messagingSenderId: "323290354887",
+            appId: "1:323290354887:web:f5b2be266128c85d571ae2",
+            measurementId: "G-53J71D66J1"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getDatabase(app);
+        const storage = getStorage(app);
+
+        // Simpan Data + Upload Gambar
+        document.getElementById("wisataForm").addEventListener("submit", async (e) => {
+            e.preventDefault();
+
+            const nama = document.getElementById("nama").value;
+            const alamat = document.getElementById("alamat").value;
+            const deskripsi = document.getElementById("deskripsi").value;
+            const biaya = document.getElementById("biaya").value;
+            const jam = document.getElementById("jam").value;
+            const kegiatan = document.getElementById("kegiatan").value.split(",").map(k => k.trim());
+            const rating = parseFloat(document.getElementById("rating").value);
+            const link = document.getElementById("link").value;
+            const file = document.getElementById("gambar").files[0];
+
+            if (!file) {
+                alert("Silakan unggah gambar.");
+                return;
+            }
+
+            try {
+                // Upload gambar ke Storage
+                const storagePath = `gambar_wisata/${Date.now()}_${file.name}`;
+                const imgRef = storageRef(storage, storagePath);
+                await uploadBytes(imgRef, file);
+                const imageUrl = await getDownloadURL(imgRef);
+
+                // Simpan ke Realtime Database
+                const wisataRef = ref(db, "destinasi_baru");
+                const newRef = push(wisataRef);
+                await set(newRef, {
+                    nama,
+                    alamat,
+                    deskripsi,
+                    biaya,
+                    jam_buka: jam,
+                    kegiatan,
+                    rating,
+                    link,
+                    imageUrl,
+                    createdAt: new Date().toISOString()
+                });
+
+                alert("Permintaan Anda Akan Segera DiProses!");
+                e.target.reset();
+            } catch (err) {
+                console.error("Gagal menyimpan:", err);
+                alert("Gagal menyimpan data.");
+            }
+        });
+    </script>
+
+
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+
+        form {
+            padding: 20px;
+            border-radius: 10px;
+            max-width: 600px;
+            margin: auto;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        h2 {
+            text-align: center;
+            color: #000;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        input[type="url"],
+        textarea {
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 6px;
+            width: 100%;
+            border: none
+        }
+
+        button {
+            background-color: rgba(36, 75, 38);
+            color: white;
+            padding: 10px;
+            font-size: 16px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #256c45;
+        }
+    </style>
+</head>
+
+<body>
+    <h2>Form Input Data Wisata</h2>
+    <form id="wisataForm">
+        <label for="nama">Nama Tempat Wisata:</label>
+        <input type="text" id="nama" name="nama" required />
+
+        <label for="alamat">Alamat: <small>(Contoh: Cempaka, Mandi Angin Barat, Kec. Karang Intan, Kabupaten Banjar,
+                Kalimantan Selatan)</small></label>
+        <input type="text" id="alamat" name="alamat" required />
+
+        <label for="deskripsi">Deskripsi:</label>
+        <textarea id="deskripsi" name="deskripsi" rows="4" required></textarea>
+
+        <label for="biaya">Biaya Masuk:</label>
+        <input type="text" id="biaya" name="biaya" required />
+
+        <label for="jam">Jam Operasional:</label>
+        <input type="text" id="jam" name="jam" required />
+
+        <label for="kegiatan">Kegiatan (pisahkan dengan koma):</label>
+        <input type="text" id="kegiatan" name="kegiatan" required />
+
+        <label for="rating">Rating:</label>
+        <input type="text" id="rating" name="rating" required />
+
+        <label for="link">Link Google Maps:</label>
+        <input type="url" id="link" name="link" required />
+
+        <label for="file">Foto Wisata:</label>
+        <input type="file" id="gambar" accept="image/*" required>
+
+        <button type="submit">Simpan Data</button>
+    </form>
+</body>
+
+</html>
