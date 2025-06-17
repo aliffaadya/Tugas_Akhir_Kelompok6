@@ -71,15 +71,6 @@
             color: #333;
         }
 
-        .back-button {
-            font-size: 14px;
-            text-decoration: none;
-            color: #333;
-            margin-bottom: 10px;
-            display: inline-block;
-            font-weight: bold;
-        }
-
         .rating {
             gap: 10px;
             background: #699C74;
@@ -88,7 +79,11 @@
             border-radius: 5px;
             width: fit-content;
             font-weight: bold;
+            color: white;
+            display: flex;
+            align-items: center;
             margin-top: 10px;
+            float: right;
         }
 
         .stars {
@@ -144,27 +139,22 @@
             display: flex;
             flex-direction: column;
             gap: 30px;
-            max-width: 270px;
-            border-radius: 27px;
-            margin-top: 10px;
+            max-width: 300px;
+            border-radius: 15px;
+            margin-top: 50px;
         }
+
         .image-gallery2 {
             display: flex;
             flex-direction: column;
             gap: 30px;
-            max-width: 280px;
-            border-radius: 27px;
-            margin-left: 30px;
+            max-width: 300px;
+            border-radius: 15px;
+            margin-left: 50px;
         }
-         .info-box {
-            position: fixed;
-            bottom: 50px;
-            right: 20px;
-            background-color: rgba(244, 238, 224, 0.7);
-            color: #000;
-            padding: 3px;
-            border-radius: 50px;
-            font-size: 25px;
+
+        html {
+            scroll-behavior: smooth;
         }
     </style>
 </head>
@@ -190,14 +180,14 @@
                             <path
                                 d="M2.002 1a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2zm12 1a1 1 0 0 1 1 1v6.5l-3.777-1.947a.5.5 0 0 0-.577.093l-3.71 3.71-2.66-1.772a.5.5 0 0 0-.63.062L1.002 12V3a1 1 0 0 1 1-1z" />
                         </svg> </a></li>
-                <li><a href="video.html"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="15" fill="currentColor"
-                            class="bi bi-play-btn" viewBox="0 0 16 15">
+                <li><a href="video.html"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="15"
+                            fill="currentColor" class="bi bi-play-btn" viewBox="0 0 16 15">
                             <path d="M6.79 5.093A.5.5 0 0 0 6 5.5v5a.5.5 0 0 0 .79.407l3.5-2.5a.5.5 0 0 0 0-.814z" />
                             <path
                                 d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2zm15 0a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1z" />
                         </svg> </a></li>
                 <li>
-                    <a href="#agenda">
+                    <a href="agenda.html">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                             class="bi bi-send" viewBox="0 0 16 16">
                             <path
@@ -209,8 +199,24 @@
     </div>
 
     <div class="main-content">
+        <!-- Tombol Back -->
+        <button onclick="history.back()" style="
+        background-color: #607466;
+        color: white;
+        padding: 8px 16px;
+        border: none;
+        border-radius: 8px;
+        font-size: 14px;
+        cursor: pointer;
+        margin-bottom: 20px;
+    ">
+            ← Kembali
+        </button>
+
+        <!-- Kontainer konten -->
         <div id="detail-container" class="destination"></div>
     </div>
+
 
     <script>
         document.addEventListener("DOMContentLoaded", () => {
@@ -224,19 +230,18 @@
                     const container = document.getElementById("detail-container");
 
                     container.innerHTML = `
-            <a href="home1.html" class="back-button"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-return-left" viewBox="0 0 16 16">
-            <path fill-rule="evenodd" d="M14.5 1.5a.5.5 0 0 1 .5.5v4.8a2.5 2.5 0 0 1-2.5 2.5H2.707l3.347 3.346a.5.5 0 0 1-.708.708l-4.2-4.2a.5.5 0 0 1 0-.708l4-4a.5.5 0 1 1 .708.708L2.707 8.3H12.5A1.5 1.5 0 0 0 14 6.8V2a.5.5 0 0 1 .5-.5"/>
-            </svg></a>
             <div class="content-row">
             <div class="image-gallery">
             <img src="${item.image1}" alt="Foto 1" class="image-gallery1" />
             <br>
             <img src="${item.image2}" alt="Foto 2" class="image-gallery2" />
+             <div class="rating"><span class="stars">⭐</span> ${item.rating} </div>
             </div>
             <div class="info">
-              <div class="rating"><span class="stars">★</span> ${item.rating} </div>
               <h1>${item.nama}</h1>
               <p>${item.deskripsi}</p>
+              <p>${item.biaya}</p>
+              <p>${item.jam_buka}</p>
              <div class="kegiatan">
                 ${(item.kegiatan || []).map(a => `
                     <div class="activity-item" style="display: flex; align-items: center; margin-bottom: 6px;">
@@ -261,14 +266,6 @@
                 });
         });
     </script>
-    <div class="info-box">
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle"
-            viewBox="0 0 16 16">
-            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16" />
-            <path
-                d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0" />
-        </svg>
-    </div>
 </body>
 
 </html>
