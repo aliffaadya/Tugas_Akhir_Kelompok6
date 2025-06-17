@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Tilik Banua</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #fff;
+      color: #000;
+    }
+
+    .hero {
+      position: relative;
+    }
+
+    .hero-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0.85;
+      z-index: -1
+    }
+
+    .info-box {
+      position: fixed;
+      bottom: 50px;
+      right: 20px;
+      background: rgba(244, 238, 224, 0.7);
+      color: #000;
+      padding: 3px;
+      border-radius: 50px;
+      font-size: 25px
+    }
+
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(244, 238, 224, 0.6);
+      padding: 5px 5%;
+    }
+
+    .logo {
+      width: 80px;
+      height: auto
+    }
+
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 40px
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 16px;
+      color: #000
+    }
+
+    .map-section {
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      gap: 20px;
+      padding: 35px;
+      flex-wrap: wrap
+    }
+
+    h2 {
+      color: #000;
+      margin-bottom: 20px;
+      text-align: center
+    }
+
+    #peta-container {
+      width: 600px;
+      height: 341px;
+      opacity: 0.8
+    }
+
+    #peta {
+      display: inline-block;
+      background: #7d4418;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      border-radius: 20px;
+      padding: 15px;
+      margin-left: 50px;
+      margin-top: -15px;
+      position: relative
+    }
+
+    #peta img {
+      width: 100%;
+      max-width: 470px;
+      height: auto;
+      object-fit: contain;
+      border-radius: 20px;
+      display: block
+    }
+
+    .lokasi {
+      position: absolute;
+      width: 16px;
+      height: 16px;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='red' viewBox='0 0 16 16'%3E%3Cpath d='M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10m0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6'/%3E%3C/svg%3E");
+      border-radius: 50%;
+      cursor: pointer;
+      transform: translate(-50%, -50%);
+      box-shadow: 0 0 5px rgba(0, 0, 0, 0.3)
+    }
+
+    #info {
+      padding: 10px;
+      border: 1px solid #aaa;
+      width: 450px;
+      max-width: 60%;
+      border-radius: 8px;
+      background: rgba(244, 238, 224, 0.6);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      font-size: 13px;
+      margin-right: 50px
+    }
+
+    button {
+      background: #699C74;
+      color: #fff;
+      padding: 5px 10px;
+      border: none;
+      border-radius: 10px;
+      font-weight: bold;
+      cursor: pointer
+    }
+
+    .footer {
+      background: rgba(36, 75, 38, 0.6);
+      text-align: center;
+      padding: 20px;
+      margin-top: 40px
+    }
+
+    .form-section {
+      padding: 20px;
+      max-width: 600px;
+      margin: 20px auto;
+      background: rgba(244, 238, 224, 0.5);
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1)
+    }
+
+    .form-section input,
+    .form-section textarea {
+      width: 100%;
+      padding: 8px;
+      margin: 5px 0 10px;
+      border: 1px solid #aaa;
+      border-radius: 5px
+    }
+
+    .form-section button {
+      background: #699C74;
+      color: #fff;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer
+    }
+
+    .hasil {
+      padding: 10px;
+      margin: 10px auto;
+      max-width: 600px;
+      background: rgba(244, 238, 224, 0.5);
+      border-radius: 8px
+    }
+
+    .hasil ul {
+      list-style: none;
+      padding: 0
+    }
+
+    .hasil ul li {
+      background: rgba(244, 238, 224, 0.7);
+      margin-bottom: 10px;
+      padding: 10px;
+      border-radius: 6px;
+      position: relative
+    }
+
+    .hasil ul li button {
+      margin: 5px
+    }
+  </style>
+</head>
+
+<body>
+  <div class="hero">
+    <img src="image/bg utama.jpg" alt="Hero Background" class="hero-bg">
+    <header class="navbar">
+      <a href="home.html">
+        <img src="image/logo.png" class="logo" alt="Logo">
+      </a>
+      <nav>
+        <ul class="nav-links">
+          <li>
+            <a href="homefix.html">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-map"
+                viewBox="0 0 16 15">
+                <path fill-rule="evenodd"
+                  d="M15.817.113A.5.5 0 0 1 16 .5v14a.5.5 0 0 1-.402.49l-5 1a.5.5 0 0 1-.196 0L5.5 15.01l-4.902.98A.5.5 0 0 1 0 15.5v-14a.5.5 0 0 1 .402-.49l5-1a.5.5 0 0 1 .196 0L10.5.99l4.902-.98a.5.5 0 0 1 .415.103M10 1.91l-4-.8v12.98l4 .8zm1 12.98 4-.8V1.11l-4 .8zm-6-.8V1.11l-4 .8v12.98z" />
+              </svg> DESTINASI </a>
+          </li>
+          <li><a href="galerifotofiks.html"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                fill="currentColor" class="bi bi-image" viewBox="0 0 16 16">
+                <path d="M6.002 5.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0" />
+                <path
+                  d="M2.002 1a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2zm12 1a1 1 0 0 1 1 1v6.5l-3.777-1.947a.5.5 0 0 0-.577.093l-3.71 3.71-2.66-1.772a.5.5 0 0 0-.63.062L1.002 12V3a1 1 0 0 1 1-1z" />
+              </svg> GALLERY </a></li>
+          <li><a href="video.html"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="15" fill="currentColor"
+                class="bi bi-play-btn" viewBox="0 0 16 15">
+                <path d="M6.79 5.093A.5.5 0 0 0 6 5.5v5a.5.5 0 0 0 .79.407l3.5-2.5a.5.5 0 0 0 0-.814z" />
+                <path
+                  d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2zm15 0a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1z" />
+              </svg> VIDEO</a></li>
+          <li>
+            <a href="#agenda">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-send"
+                viewBox="0 0 16 16">
+                <path
+                  d="M15.854.146a.5.5 0 0 1 .11.54l-5.819 14.547a.75.75 0 0 1-1.329.124l-3.178-4.995L.643 7.184a.75.75 0 0 1 .124-1.33L15.314.037a.5.5 0 0 1 .54.11ZM6.636 10.07l2.761 4.338L14.13 2.576zm6.787-8.201L1.591 6.602l4.339 2.76z" />
+              </svg> AGENDA</a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+
+    <section class="map-section">
+      <div id="peta-container">
+        <div id="peta">
+          <img src="image/peta kabupaten Banjar ril.png" alt="Peta">
+          <div class="lokasi" style="top: 73%; left: 41%;" onclick="tampilkanInfo('Taman Hutan Raya')"></div>
+          <div class="lokasi" style="top: 69%; left: 40%;" onclick="tampilkanInfo('Air Terjun Mandin Putri Kembar')">
+          </div>
+          <div class="lokasi" style="top: 70%; left: 50%;" onclick="tampilkanInfo('Bukit Batu')"></div>
+          <div class="lokasi" style="top: 63%; left: 17%;" onclick="tampilkanInfo('Danau Biru Gambut')"></div>
+          <div class="lokasi" style="top: 75%; left: 45%;" onclick="tampilkanInfo('Bukit Matang Keladan')"></div>
+          <div class="lokasi" style="top: 73%; left: 49.5%;" onclick="tampilkanInfo('Pulau Pinus')"></div>
+          <div class="lokasi" style="top: 60%; left: 34%;" onclick="tampilkanInfo('Kubah Guru Sekumpul')"></div>
+          <div class="lokasi" style="top: 53.7%; left: 33.8%;" onclick="tampilkanInfo('Kubah Datu Kalampayan')"></div>
+          <div class="lokasi" style="top: 60%; left: 63%;" onclick="tampilkanInfo('Air Terjun Minanga')"></div>
+          <div class="lokasi" style="top: 78%; left: 40%;" onclick="tampilkanInfo('Kiram Park')"></div>
+        </div>
+      </div>
+
+      <div id="info"><em>Klik lokasi pada peta untuk melihat informasi lokasi wisata.</em></div>
+    </section>
+
+    <!-- Form Input -->
+    <section class="form-section">
+      <h2>Tambah Wisata Baru</h2>
+      <input id="nama" placeholder="Nama Wisata">
+      <textarea id="deskripsi" placeholder="Deskripsi Singkat"></textarea>
+      <input id="kegiatan" placeholder="Kegiatan yang Bisa Dilakukan">
+      <input id="alamat" placeholder="Alamat Google Maps">
+      <br>
+      <button id="simpanBtn">Simpan</button>
+    </section>
+
+    <!-- Hasil -->
+    <section class="hasil">
+      <h2>Daftar Wisata</h2>
+      <ul id="daftarWisata"></ul>
+    </section>
+
+    <footer class="footer">
+      &copy; Tilik Banua 2025
+    </footer>
+  </div>
+
+  <script>
+    // tampil info peta
+    function tampilkanInfo(nama) {
+      document.querySelector("#info").innerHTML = "<strong>" + nama + "</strong>";
+    }
+
+    // menyimpan, menampilkan, edit, dan delete
+    let daftar = JSON.parse(localStorage.getItem('daftar')) || [];
+
+    function tampilDaftar() {
+      const ul = document.querySelector("#daftarWisata");
+      ul.innerHTML = '';
+      daftar.forEach((item, i) => {
+        ul.innerHTML += `
+        <li>
+          <strong>${item.nama}</strong> <br> Deskripsi: ${item.deskripsi} <br> Kegiatan: ${item.kegiatan} <br> Alamat: ${item.alamat}
+          <br>
+          <button onclick="editWisata(${i})">Edit</button>
+          <button onclick="deleteWisata(${i})">Hapus</button>
+        </li>`;
+      })
+    }
+
+    function simpanWisata() {
+      let nama = document.querySelector("#nama").value;
+      let deskripsi = document.querySelector("#deskripsi").value;
+      let kegiatan = document.querySelector("#kegiatan").value;
+      let alamat = document.querySelector("#alamat").value;
+
+      if (nama && deskripsi && kegiatan && alamat) {
+        daftar.push({ nama, deskripsi, kegiatan, alamat });
+        localStorage.setItem('daftar', JSON.stringify(daftar));
+        tampilDaftar();
+
+        document.querySelector("#nama").value = '';
+        document.querySelector("#deskripsi").value = '';
+        document.querySelector("#kegiatan").value = '';
+        document.querySelector("#alamat").value = '';
+      }
+    }
+
+    function editWisata(id) {
+      let item = daftar[id];
+      let nama = prompt("Edit Nama", item.nama);
+      let deskripsi = prompt("Edit Deskripsi", item.deskripsi);
+      let kegiatan = prompt("Edit Kegiatan", item.kegiatan);
+      let alamat = prompt("Edit Alamat Google Maps", item.alamat);
+      if (nama && deskripsi && kegiatan && alamat) {
+        daftar[id] = { nama, deskripsi, kegiatan, alamat };
+
+        localStorage.setItem('daftar', JSON.stringify(daftar));
+        tampilDaftar();
+      }
+    }
+
+    function deleteWisata(id) {
+      daftar.splice(id, 1);
+      localStorage.setItem('daftar', JSON.stringify(daftar));
+      tampilDaftar();
+    }
+
+    document.querySelector("#simpanBtn").addEventListener("click", simpanWisata);
+
+    tampilDaftar();
+
+  </script>
+
+  <script>
+    function tampilkanInfo(nama) {
+      const deskripsi = {
+        "Taman Hutan Raya": `
+        <img src="image/tahura.jpg" alt="Taman Hutan Raya" style="width:60%; height:50%; border-radius:10px;"><br>
+        <br>
+        📍 <strong>Taman Hutan Raya</strong><br>
+        <br>
+        <div style="text-align: justify;">
+        Cempaka, Mandi Angin Barat, Kec. Karang Intan, Kabupaten Banjar, Kalimantan Selatan
+        </div>
+        <br>
+        <a href="detail_Tahura.html"> 
+          <button>Read More</button>
+        </a>
+        `,
+
+        "Air Terjun Mandin Putri Kembar": `
+        <img src="image/air terjun mandin.jpg" alt="Air Terjun Mandin Putri Kembar" style="width:50%; height:50%; border-radius:10px;"><br>
+        <br>
+        📍 <strong>Air Terjun Mandin Putri Kembar</strong><br>
+        <br>
+        <div style="text-align: justify;">
+       Cempaka, Kec. Cempaka, Kota Banjarbaru, Kalimantan Selatan
+        </div>
+        <br>
+        <a href="detail_AirTerjunMandin.html"> 
+          <button>Read More</button>
+        </a>
+        `,
+
+        "Bukit Batu": `
+        <img src="image/bukit batu.jpg" alt="Bukit Batu" style="width:50%; height:50%; border-radius:10px;"><br>
+        <br>
+        📍 <strong>Bukit Batu</strong><br>
+        <br>
+        <div style="text-align: justify;">
+        Tiwingan Lama, Kec. Aranio, Kabupaten Banjar, Kalimantan Selatan
+        </div>
+        <br>
+        <a href="detail_BukitBatu.html"> 
+          <button>Read More</button>
+        </a>
+        `,
+
+        "Danau Biru Gambut": `
+        <img src="image/danau biru gambut.jpg" alt="Danau Biru Gambut" style="width:50%; height:50%; border-radius:10px;"><br>
+        <br>
+        📍 <strong>Danau Biru Gambut</strong><br>
+        <br>
+        <div style="text-align: justify;">
+        Jambu Raya, Tambak Padi, Beruntung Baru, Jambu Raya, Kec. Beruntung Baru, Kabupaten Banjar, Kalimantan Selatan
+        </div>
+        <br>
+        <a href="detail_DanauBiru.html"> 
+          <button>Read More</button>
+        </a>
+        `,
+
+        "Bukit Matang Keladan": `
+        <img src="image/bukit matang keladan.png" alt="Bukit Matang Keladan" style="width:60%; height:50%; border-radius:10px;"><br>
+        <br>
+        📍 <strong>Bukit Matang Keladan</strong><br>
+        <br>
+        <div style="text-align: justify;">
+        Aranio, Kec. Aranio, Kabupaten Banjar, Kalimantan Selatan
+        </div>
+        <br>
+        <a href="detail_BukitMatang.html"> 
+          <button>Read More</button>
+        </a>
+        `,
+
+        "Pulau Pinus": `
+        <img src="image/pulau pinus.jpg" alt="Pulau Pinus" style="width:50%; height:50%; border-radius:10px;"><br>
+        <br>
+        📍 <strong>Pulau Pinus</strong><br>
+        <br>
+        <div style="text-align: justify;">
+        Tiwingan Baru, Aranio, Tiwingan Lama, Kec. Aranio, Kabupaten Banjar, Kalimantan Selatan
+        </div>
+        <br>
+        <a href="detail_PulauPinus.html"> 
+          <button>Read More</button>
+        </a>
+        `,
+
+        "Kubah Guru Sekumpul": `
+        <img src="image/sekumpul.png" alt="Sekumpul" style="width:60%; height:50%; border-radius:10px;"><br>
+        <br>
+        📍 <strong>Kubah Guru Sekumpul</strong><br>
+        <br>
+        <div style="text-align: justify;">
+        Unnamed Road, Sungai Sipai, Kec. Martapura, Kabupaten Banjar, Kalimantan Selatan
+        </div>
+        <br>
+        <a href="detail_KubahGuru.html"> 
+          <button>Read More</button>
+        </a>
+        `,
+
+        "Kubah Datu Kalampayan": `
+        <img src="image/kelampayan.jpg" alt="Kelampayan" style="width:60%; height:50%; border-radius:10px;"><br>
+        <br>
+        📍 <strong>Kubah Datu Kalampayan</strong><br>
+        <br>
+        <div style="text-align: justify;">
+        Kalampayan, Kec. Astambul, Kabupaten Banjar, Kalimantan Selatan
+        </div>
+        <br>
+        <a href="detail_Kelampayan.html"> 
+          <button>Read More</button>
+        </a>
+        `,
+
+        "Air Terjun Minanga": `
+        <img src="image/air terjun minanga.jpg" alt="Air Terjun Minanga" style="width:50%; height:50%; border-radius:10px;"><br>
+        <br>
+        📍 <strong>Air Terjun Minanga</strong><br>
+        <br>
+        <div style="text-align: justify;">
+         Rantau Balai, Kec. Aranio, Kabupaten Banjar, Kalimantan Selatan
+        </div>
+        <br>
+        <a href="detail_Minanga.html"> 
+          <button>Read More</button>
+        </a>
+        `,
+
+        "Kiram Park": `
+        <img src="image/kirampark.jpeg" alt="Kiram Park" style="width:60%; height:50%; border-radius:10px;"><br>
+        <br>
+        📍 <strong>Kiram Park</strong><br>
+        <br>
+        <div style="text-align: justify;">
+        Kiram, Kec. Karang Intan, Kabupaten Banjar, Kalimantan Selatan
+        </div>
+        <br>
+        <a href="detail_KiramPark.html"> 
+          <button>Read More</button>
+        </a>
+        `,
+
+      };
+      document.getElementById('info').innerHTML = deskripsi[nama] || "Informasi tidak ditemukan.";
+    }
+  </script>
+
+</body>
+
+</html>

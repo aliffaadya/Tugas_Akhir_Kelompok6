@@ -1,0 +1,152 @@
+[
+  {
+    "image1": "image/air terjun mandin.jpg",
+    "rating": 4.3,
+    "nama": "AIR TERJUN MANDIN PUTRI KEMBAR",
+    "deskripsi": "Air Terjun Mandin Putri Kembar terletak di Tahura Sultan Adam, Kabupaten Banjar, Kalimantan Selatan, dan dapat dicapai dengan trekking dari Desa Mandiangin Timur. Dikenal dengan pemandangan alam yang indah dan udara sejuk.",
+    "biaya": "Biaya Masuk : Rp. 12.000 per orang dan Rp. 10.000 untuk anak-anak. Biaya tambahan juga ada untuk berkemah Rp 5.000.",
+    "jam_buka": "Jam Operasional : 08.00-16.00 WITA.",
+    "kegiatan": [
+      "Berenang",
+      "Camping",
+      "Edukasi Flora dan Fauna"
+    ],
+    "link": "https://maps.app.goo.gl/2FnQUe4G22RhHgFfA"
+  },
+  {
+    "image1": "image/bukit batu.jpg",
+    "image2": "image/bukit batu 2.jpg",
+    "rating": 4.7,
+    "nama": "BUKIT BATU",
+    "deskripsi": "Bukit Batu adalah wisata alam di Kabupaten Banjar, Kalimantan Selatan, dengan pemandangan waduk dan pegunungan yang cocok untuk piknik.",
+    "biaya": "Biaya Masuk : Rp. 10.000 per orang dan Rp. 8.000 untuk anak-anak.",
+    "jam_buka": "Jam Operasional : 08.00-18.00 WITA.",
+    "kegiatan": [
+      "Camping dan Outbond",
+      "Mendaki bukit atau Trekking ringan",
+      "Berenang",
+      "Bersepeda atau Trail Adventure"
+    ],
+    "link": "https://maps.app.goo.gl/gYpZJyjvwJqbupSZA"
+  },
+  {
+    "image1": "image/tahura.jpg",
+    "image2": "image/tahura 2.jpg",
+    "rating": 4.6,
+    "nama": "TAMAN HUTAN RAYA (TAHURA)",
+    "deskripsi": "Taman Hutan Raya (Tahura) Sultan adalah kawasan konservasi dan wisata alam yang terletak di Kalimantan Selatan, mencakup wilayah Kabupaten Banjar dan Kabupaten Tanah Laut. Dengan luas sekitar 112.000 hektar, kawasan ini menawarkan berbagai daya tarik alam dan fasilitas wisata yang menarik bagi pengunjung.",
+    "biaya": "Biaya Masuk : Rp. 12.000 per orang dan Rp. 10.000 untuk anak-anak. Biaya tambahan juga ada untuk berkemah Rp 5.000.",
+    "jam_buka": "Jam Operasional : 08.00-16.00 WITA, kecuali untuk camping ground buka 24 jam.",
+    "kegiatan": [
+      "Trekking dan Hikking",
+      "Camping dan Outbond",
+      "Edukasi Flora dan Fauna",
+      "Pemandian Air Panas",
+      "Bersepeda atau Trail Adventure",
+      "Paralayang"
+    ],
+    "link": "https://maps.app.goo.gl/wYEobAq3AaGgsG8V9"
+  },
+  {
+    "image1": "image/danau biru gambut.jpg",
+    "rating": 3.8,
+    "nama": "DANAU BIRU GAMBUT",
+    "deskripsi": "Danau Biru Gambut memikat wisatawan dengan air biru cerah dan alam Kalimantan yang masih asri.",
+    "biaya": "Biaya Masuk : Rp. 10.000 per orang.",
+    "jam_buka": "Jam Operasional : 08.00-18.00 WITA.",
+    "kegiatan": [
+      "Piknik dan Bersantai",
+      "Berenang",
+      "Spot Foto Menarik"
+    ],
+    "link": "https://maps.app.goo.gl/p7Citadrs6qAGCx27"
+  },
+  {
+    "image1": "image/bukit matang keladan.png",
+    "rating": 4.5,
+    "nama": "BUKIT MATANG KELADAN",
+    "deskripsi": "Bukit Matang Keladan ini menawarkan pemandangan Waduk Riam Kanan yang memukau, terutama saat matahari terbit, lengkap dengan spot foto.",
+    "biaya": "Biaya Masuk : Rp. 5.000 per orang.",
+    "jam_buka": "Jam Operasional : 07.00-19.00 WITA.",
+    "kegiatan": [
+      "Trekking dan Hikking",
+      "Camping dan Outbond",
+      "Edukasi Flora dan Fauna",
+      "Spot Foto Menarik"
+    ],
+    "link": "https://maps.app.goo.gl/eG9YSgadWnixmGDS8"
+  },
+  {
+    "image1": "image/pulau pinus.jpg",
+    "rating": 4.5,
+    "nama": "PULAU PINUS",
+    "deskripsi": "Pulau Pinus adalah destinasi wisata alam di Danau Riam Kanan, yang menawarkan pemandangan danau indah, udara sejuk, serta hutan pinus yang asri. Cocok untuk berkemah dan liburan santai.",
+    "biaya": "Biaya Masuk : Rp. 3.000 per orang dan dikenakan harga tiket sebesar Rp350.000 untuk biaya sewa kapal.",
+    "jam_buka": "Jam Operasional : 08.00-18.00 WITA.",
+    "kegiatan": [
+      "Camping dan Outbond",
+      "Berenang",
+      "Wahana Air",
+      "Fasilitas Gazebo dan Lainnya"
+    ],
+    "link": "https://maps.app.goo.gl/o7Y19Hc4hBTgUkTGA"
+  },
+  {
+    "image1": "image/sekumpul.png",
+    "rating": 4.9,
+    "nama": "KUBAH GURU SEKUMPUL",
+    "deskripsi": "Kubah Guru Sekumpul adalah makam ulama KH Muhammad Zaini Abdul Ghani di Martapura, Kalsel, yang menjadi pusat ziarah dan wisata religi terkenal.",
+    "biaya": "Biaya Masuk : Tidak dikenakan biaya.",
+    "jam_buka": "Jam Operasional : Jam buka untuk berkunjung ke kubah dan mushola ini biasanya mulai dari pagi hingga sore, namun lebih baik untuk mengkonfirmasi dengan pihak pengelola jika ada perubahan jam operasional.",
+    "kegiatan": [
+      "Wisata Religi",
+      "Tempat Ziarah",
+      "Edukasi Sejarah"
+    ],
+    "link": "https://maps.app.goo.gl/NCYeSqDJ6QqsWewBA"
+  },
+  {
+    "image1": "image/kelampayan.jpg",
+    "rating": 4.7,
+    "nama": "KUBAH DATU KALAMPAYAN",
+    "deskripsi": "Wisata religi Kelampayan di Kalimantan Selatan adalah pusat ziarah utama di Makam Syekh Muhammad Arsyad Al-Banjari, atau Datu Kelampayan, seorang ulama besar penyebar Islam.",
+    "biaya": "Biaya Masuk : Rp. 5.000 per kendaraan.",
+    "jam_buka": "Jam Operasional : 24 Jam.",
+    "kegiatan": [
+      "Wisata Religi",
+      "Tempat Ziarah",
+      "Edukasi Sejarah"
+    ],
+    "link": "https://maps.app.goo.gl/dyf9J8NmTUVguvY77"
+  },
+  {
+    "image1": "image/air terjun minanga.jpg",
+    "rating": 4.6,
+    "nama": "AIR TERJUN MINANGA",
+    "deskripsi": "Air Terjun Minanga adalah air terjun tersembunyi di Desa Rantau Balai, Kabupaten Banjar, Kalsel, cocok untuk trekking dan menikmati alam.",
+    "biaya": "Biaya Masuk : Rp. 10.000 per orang.",
+    "jam_buka": "Jam Operasional : 08.00-18.00 WITA.",
+    "kegiatan": [
+      "Trekking dan Hikking",
+      "Edukasi Flora dan Fauna",
+      "Pemandian di Sekitar Air Terjun",
+      "Spot Foto Menarik"
+    ],
+    "link": "https://maps.app.goo.gl/PE3FYcWzCZ538U4Z7"
+  },
+  {
+    "image1": "image/kirampark.jpeg",
+    "rating": 4.3,
+    "nama": "KIRAM PARK",
+    "deskripsi": "Kiram Park adalah destinasi wisata alam terpadu di Kabupaten Banjar, Kalsel, menawarkan penginapan (villa, glamping) dan rekreasi modern di area perbukitan asri.",
+    "biaya": "Biaya Masuk : Rp. 10.000 per orang dan Rp. 5.000 untuk anak-anak.",
+    "jam_buka": "Jam Operasional : 07.00-18.00 WITA.",
+    "kegiatan": [
+      "Trekking dan Hikking",
+      "Camping dan Outbond",
+      "Fasilitas Villa dan Lainnya",
+      "Bersepeda atau Trail Adventure"
+    ],
+    "link": "https://maps.app.goo.gl/rQUt5tjfZna4feNQ6"
+  }
+]
