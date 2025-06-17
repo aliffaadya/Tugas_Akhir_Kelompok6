@@ -6,6 +6,136 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Tilik Banua</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+  <script type="module">
+    // Import SDK dari Firebase CDN
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+    import { getDatabase, ref, push, set, onValue, remove, update, get } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+    import { getStorage, ref as storageRef, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-storage.js";
+
+    // Konfigurasi Firebase
+    const firebaseConfig = {
+      apiKey: "AIzaSyAfPsAf-T24KLuyKGPQ1pyYUc0Vs-OEv90",
+      authDomain: "tilik-banua.firebaseapp.com",
+      databaseURL: "https://tilik-banua-default-rtdb.firebaseio.com",
+      projectId: "tilik-banua",
+      storageBucket: "tilik-banua.appspot.com",
+      messagingSenderId: "323290354887",
+      appId: "1:323290354887:web:f5b2be266128c85d571ae2",
+      measurementId: "G-53J71D66J1"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getDatabase(app);
+    const storage = getStorage(app);
+    const wisataRef = ref(db, "destinasi_baru");
+
+    let idEdit = null;
+
+    // Fungsi Simpan / Update
+    document.getElementById("simpanBtn").addEventListener("click", async () => {
+      const nama = document.getElementById("nama").value;
+      const alamat = document.getElementById("alamat").value;
+      const deskripsi = document.getElementById("deskripsi").value;
+      const biaya = document.getElementById("biaya").value;
+      const jam = document.getElementById("jam").value;
+      const kegiatan = document.getElementById("kegiatan").value.split(",").map(k => k.trim());
+      const rating = parseFloat(document.getElementById("rating").value);
+      const link = document.getElementById("link").value;
+      const file = document.getElementById("gambar").files[0];
+      let imageUrl = "";
+
+      try {
+        if (file) {
+          const imgPath = `gambar_wisata/${Date.now()}_${file.name}`;
+          const imgRef = storageRef(storage, imgPath);
+          await uploadBytes(imgRef, file);
+          imageUrl = await getDownloadURL(imgRef);
+        }
+
+        if (idEdit) {
+          // MODE UPDATE
+          const itemRef = ref(db, `destinasi_baru/${idEdit}`);
+          const updateData = { nama, alamat, deskripsi, biaya, jam, kegiatan, rating, link };
+          if (imageUrl) updateData.imageUrl = imageUrl;
+          await update(itemRef, updateData);
+          alert("Data berhasil diperbarui!");
+          idEdit = null;
+          document.getElementById("simpanBtn").textContent = "Simpan";
+        } else {
+          // MODE TAMBAH
+          const newRef = push(wisataRef);
+          await set(newRef, {
+            nama, alamat, deskripsi, biaya, jam, kegiatan, rating, link, imageUrl,
+            createdAt: new Date().toISOString()
+          });
+          alert("Permintaan Anda akan segera diproses!");
+        }
+
+        // Reset Form
+        ["nama", "alamat", "deskripsi", "biaya", "jam", "kegiatan", "rating", "link", "gambar"]
+          .forEach(id => document.getElementById(id).value = "");
+
+      } catch (err) {
+        console.error("Gagal simpan:", err);
+        alert("Gagal menyimpan data.");
+      }
+    });
+
+    // Tampilkan daftar wisata
+    function tampilDaftar() {
+      onValue(wisataRef, snapshot => {
+        const data = snapshot.val();
+        const list = document.getElementById("daftarWisata");
+        list.innerHTML = "";
+
+        if (data) {
+          Object.entries(data).forEach(([id, item]) => {
+            list.innerHTML += `
+            <li style="margin-bottom:10px;">
+              <strong>${item.nama}</strong><br>
+              ${item.deskripsi}<br>
+              <em>${item.alamat}</em><br>
+              <button onclick="editWisata('${id}')">Edit</button>
+              <button onclick="deleteWisata('${id}')">Hapus</button>
+            </li>
+          `;
+          });
+        } 
+      });
+    }
+
+    tampilDaftar();
+
+    // Fungsi Edit
+    window.editWisata = async function (id) {
+      const itemRef = ref(db, `destinasi_baru/${id}`);
+      const snapshot = await get(itemRef);
+      const data = snapshot.val();
+      if (!data) return;
+
+      document.getElementById("nama").value = data.nama;
+      document.getElementById("alamat").value = data.alamat;
+      document.getElementById("deskripsi").value = data.deskripsi;
+      document.getElementById("biaya").value = data.biaya;
+      document.getElementById("jam").value = data.jam;
+      document.getElementById("kegiatan").value = data.kegiatan?.join(", ");
+      document.getElementById("rating").value = data.rating;
+      document.getElementById("link").value = data.link;
+
+      idEdit = id;
+      document.getElementById("simpanBtn").textContent = "Update";
+    };
+
+    // Fungsi Hapus
+    window.deleteWisata = async function (id) {
+      const itemRef = ref(db, `destinasi_baru/${id}`);
+      if (confirm("Yakin ingin menghapus data ini?")) {
+        await remove(itemRef);
+      }
+    };
+  </script>
+
+
   <style>
     * {
       margin: 0;
@@ -28,7 +158,7 @@
       top: 0;
       left: 0;
       width: 100%;
-      height: 108%;
+      height: 105.8%;
       opacity: 0.85;
       z-index: -1
     }
@@ -153,14 +283,14 @@
     }
 
     .form-section {
-      padding: 20px;
+      padding: 100px 20px 20px 20px;
       max-width: 600px;
-      margin: 20px auto;
-      margin-top: 80px;
+      margin-top: 3000px;
       background: rgba(244, 238, 224, 0.5);
       border-radius: 10px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1)
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     }
+
 
     .form-section input,
     .form-section textarea {
@@ -372,20 +502,41 @@
 
 
 
+    <br>
+    <br>
+    <br>
+    <br>
     <!-- Form Input -->
-    <section class="form-section" class="hasil" id="formAgenda">
-      <h2>Tambah Wisata Baru</h2>
-      <input id="nama" placeholder="Nama Wisata">
-      <textarea id="deskripsi" placeholder="Deskripsi Singkat"></textarea>
-      <input id="kegiatan" placeholder="Kegiatan yang Bisa Dilakukan">
-      <input id="alamat" placeholder="Alamat Google Maps">
-      <br>
+    <section class="form-section hasil" id="formAgenda">
+      <h2>Tambah Destinasi Baru</h2>
+
+      <input id="nama" placeholder="Nama Tempat Wisata" required />
+
+      <input id="alamat" placeholder="Alamat Lengkap (Contoh: Cempaka, Mandi Angin Barat, Kec. Karang Intan...)"
+        required />
+
+      <textarea id="deskripsi" placeholder="Deskripsi Singkat" rows="4" required></textarea>
+
+      <input id="biaya" placeholder="Biaya Masuk (Contoh: Rp 10.000)" required />
+
+      <input id="jam" placeholder="Jam Operasional (Contoh: 08.00 - 17.00)" required />
+
+      <input id="kegiatan" placeholder="Kegiatan (pisahkan dengan koma jika lebih dari 1)" required />
+
+      <input id="rating" placeholder="Rating (Contoh: 4.5)" required />
+
+      <input id="link" placeholder="Link Google Maps" type="url" required />
+
+      <small>Foto Destinasi (Opsional):</small>
+      <input id="gambar" type="file" accept="image/*" />
+
+      <br><br>
       <button id="simpanBtn">Simpan</button>
     </section>
 
     <!-- Hasil -->
     <section class="hasil">
-      <h2>Daftar Wisata</h2>
+      <h2>Daftar Destinasi</h2>
       <ul id="daftarWisata"></ul>
     </section>
     <div class="info-box-modal" id="agendaModal" style="display: none;">
@@ -492,69 +643,6 @@
       document.querySelector("#info").innerHTML = "<strong>" + nama + "</strong>";
     }
 
-    // menyimpan, menampilkan, edit, dan delete
-    let daftar = JSON.parse(localStorage.getItem('daftar')) || [];
-
-    function tampilDaftar() {
-      const ul = document.querySelector("#daftarWisata");
-      ul.innerHTML = '';
-      daftar.forEach((item, i) => {
-        ul.innerHTML += `
-        <li>
-          <strong>${item.nama}</strong> <br> Deskripsi: ${item.deskripsi} <br> Kegiatan: ${item.kegiatan} <br> Alamat: ${item.alamat}
-          <br>
-          <button onclick="editWisata(${i})">Edit</button>
-          <button onclick="deleteWisata(${i})">Hapus</button>
-        </li>`;
-      })
-    }
-
-    function simpanWisata() {
-      let nama = document.querySelector("#nama").value;
-      let deskripsi = document.querySelector("#deskripsi").value;
-      let kegiatan = document.querySelector("#kegiatan").value;
-      let alamat = document.querySelector("#alamat").value;
-
-      if (nama && deskripsi && kegiatan && alamat) {
-        daftar.push({ nama, deskripsi, kegiatan, alamat });
-        localStorage.setItem('daftar', JSON.stringify(daftar));
-        tampilDaftar();
-
-        document.querySelector("#nama").value = '';
-        document.querySelector("#deskripsi").value = '';
-        document.querySelector("#kegiatan").value = '';
-        document.querySelector("#alamat").value = '';
-      }
-    }
-
-    function editWisata(id) {
-      let item = daftar[id];
-      let nama = prompt("Edit Nama", item.nama);
-      let deskripsi = prompt("Edit Deskripsi", item.deskripsi);
-      let kegiatan = prompt("Edit Kegiatan", item.kegiatan);
-      let alamat = prompt("Edit Alamat Google Maps", item.alamat);
-      if (nama && deskripsi && kegiatan && alamat) {
-        daftar[id] = { nama, deskripsi, kegiatan, alamat };
-
-        localStorage.setItem('daftar', JSON.stringify(daftar));
-        tampilDaftar();
-      }
-    }
-
-    function deleteWisata(id) {
-      daftar.splice(id, 1);
-      localStorage.setItem('daftar', JSON.stringify(daftar));
-      tampilDaftar();
-    }
-
-    document.querySelector("#simpanBtn").addEventListener("click", simpanWisata);
-
-    tampilDaftar();
-
-  </script>
-
-
-  <script>
     function tampilkanInfo(nama) {
       const deskripsi = {
         "Taman Hutan Raya": `
