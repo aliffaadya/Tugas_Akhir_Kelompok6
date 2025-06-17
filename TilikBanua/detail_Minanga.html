@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tilik Banua</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        body {
+            display: flex;
+            background-color: #cbc8be;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .sidebar {
+            background-color: #607466;
+            opacity: 0.95;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-top: 25px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            width: 90px;
+            z-index: 1000;
+        }
+
+        .sidebar nav a {
+            display: block;
+            margin: 50px 0;
+        }
+
+
+        .logo {
+            width: 80px;
+        }
+
+        .nav-links {
+            list-style: none;
+            gap: 50px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            font-size: 30px;
+            color: #000;
+            opacity: 0.5;
+        }
+
+
+        .main-content {
+            margin-left: 90px;
+            padding: 20px 30px;
+            width: calc(100% - 90px);
+            height: 100vh;
+            overflow-y: auto;
+            opacity: 0.9;
+        }
+
+        .destination {
+            color: #333;
+        }
+
+        .rating {
+            gap: 10px;
+            background: #699C74;
+            opacity: 0.95;
+            padding: 5px 10px;
+            border-radius: 5px;
+            width: fit-content;
+            font-weight: bold;
+            margin-top: 10px;
+            float: right;
+        }
+
+        .stars {
+            color: #ffc107;
+        }
+
+        .info h1 {
+            font-size: 28px;
+            margin-top: 10px;
+            margin-bottom: 15px;
+        }
+
+        .info p {
+            margin-bottom: 15px;
+            font-size: 16px;
+            line-height: 1.6;
+            text-align: justify;
+        }
+
+        .kegiatan {
+            list-style: none;
+            margin-left: 50px;
+        }
+
+        .location {
+            font-size: 14px;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .btn-location {
+            background-color: #699C74;
+            opacity: 0.95;
+            color: white;
+            text-decoration: none;
+            padding: 5px 10px;
+            border-radius: 8px;
+            font-weight: bold;
+            display: inline-block;
+        }
+
+        .content-row {
+            display: flex;
+            flex-direction: row;
+            gap: 30px;
+            align-items: flex-start;
+            flex-wrap: nowrap;
+            width: 100%;
+            text-align: center;
+        }
+
+        .image-gallery1 {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+            max-width: 300px;
+            border-radius: 15px;
+            margin-top: 50px;
+        }
+
+        .info-box {
+            position: fixed;
+            bottom: 50px;
+            right: 20px;
+            background-color: rgba(244, 238, 224, 0.7);
+            color: #000;
+            padding: 3px;
+            border-radius: 50px;
+            font-size: 25px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="sidebar">
+        <a href="home.html">
+            <img src="image/logo.png" class="logo" alt="Logo">
+        </a>
+        <nav>
+            <ul class="nav-links">
+                <li>
+                    <a href="home1.html">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                            class="bi bi-map" viewBox="0 0 16 15">
+                            <path fill-rule="evenodd"
+                                d="M15.817.113A.5.5 0 0 1 16 .5v14a.5.5 0 0 1-.402.49l-5 1a.5.5 0 0 1-.196 0L5.5 15.01l-4.902.98A.5.5 0 0 1 0 15.5v-14a.5.5 0 0 1 .402-.49l5-1a.5.5 0 0 1 .196 0L10.5.99l4.902-.98a.5.5 0 0 1 .415.103M10 1.91l-4-.8v12.98l4 .8zm1 12.98 4-.8V1.11l-4 .8zm-6-.8V1.11l-4 .8v12.98z" />
+                        </svg> </a>
+                </li>
+                <li><a href="galeri.html"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                            fill="currentColor" class="bi bi-image" viewBox="0 0 16 16">
+                            <path d="M6.002 5.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0" />
+                            <path
+                                d="M2.002 1a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2zm12 1a1 1 0 0 1 1 1v6.5l-3.777-1.947a.5.5 0 0 0-.577.093l-3.71 3.71-2.66-1.772a.5.5 0 0 0-.63.062L1.002 12V3a1 1 0 0 1 1-1z" />
+                        </svg> </a></li>
+                <li><a href="video.html"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="15"
+                            fill="currentColor" class="bi bi-play-btn" viewBox="0 0 16 15">
+                            <path d="M6.79 5.093A.5.5 0 0 0 6 5.5v5a.5.5 0 0 0 .79.407l3.5-2.5a.5.5 0 0 0 0-.814z" />
+                            <path
+                                d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2zm15 0a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1z" />
+                        </svg> </a></li>
+                <li>
+                    <a href="agenda.html">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                            class="bi bi-send" viewBox="0 0 16 16">
+                            <path
+                                d="M15.854.146a.5.5 0 0 1 .11.54l-5.819 14.547a.75.75 0 0 1-1.329.124l-3.178-4.995L.643 7.184a.75.75 0 0 1 .124-1.33L15.314.037a.5.5 0 0 1 .54.11ZM6.636 10.07l2.761 4.338L14.13 2.576zm6.787-8.201L1.591 6.602l4.339 2.76z" />
+                        </svg></a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+
+    <div class="main-content">
+        <!-- Tombol Back -->
+        <button onclick="history.back()" style="
+        background-color: #607466;
+        color: white;
+        padding: 8px 16px;
+        border: none;
+        border-radius: 8px;
+        font-size: 14px;
+        cursor: pointer;
+        margin-bottom: 20px;
+    ">
+            ← Kembali
+        </button>
+
+        <!-- Kontainer konten -->
+        <div id="detail-container" class="destination"></div>
+    </div>
+
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const id = parseInt(urlParams.get("id")) || 8;
+
+            fetch('data.json')
+                .then(response => response.json())
+                .then(data => {
+                    const item = data[id];
+                    const container = document.getElementById("detail-container");
+
+                    container.innerHTML = `
+            <div class="content-row">
+            <div class="image-gallery">
+            <img src="${item.image1}" alt="Foto 1" class="image-gallery1" />
+            <div class="rating"><span class="stars">⭐</span> ${item.rating} </div>
+            </div>
+            <div class="info">
+              <h1>${item.nama}</h1>
+              <p>${item.deskripsi}</p>
+              <p>${item.biaya}</p>
+              <p>${item.jam_buka}</p>
+             <div class="kegiatan">
+                ${(item.kegiatan || []).map(a => `
+                    <div class="activity-item" style="display: flex; align-items: center; margin-bottom: 6px;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check2-circle" viewBox="0 0 16 16" style="margin-right: 8px;">
+                        <path d="M2.5 8a5.5 5.5 0 0 1 8.25-4.764.5.5 0 0 0 .5-.866A6.5 6.5 0 1 0 14.5 8a.5.5 0 0 0-1 0 5.5 5.5 0 1 1-11 0"/>
+                        <path d="M15.354 3.354a.5.5 0 0 0-.708-.708L8 9.293 5.354 6.646a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0z"/>
+                    </svg>
+                    <span>${a}</span>
+                    </div>
+                `).join('') || '<div>Tidak ada aktivitas tercatat.</div>'}
+                </div>
+                <br>
+              <a class="btn-location" href="https://maps.app.goo.gl/PE3FYcWzCZ538U4Z7" target="_blank">
+                View Location
+              </a>
+            </div>
+          `;
+                })
+                .catch(error => {
+                    console.error("Gagal memuat data:", error);
+                    document.getElementById("detail-container").innerHTML = "<p>Gagal memuat data destinasi.</p>";
+                });
+        });
+    </script>
+    <div class="info-box">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle"
+            viewBox="0 0 16 16">
+            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16" />
+            <path
+                d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0" />
+        </svg>
+    </div>
+</body>
+
+</html>

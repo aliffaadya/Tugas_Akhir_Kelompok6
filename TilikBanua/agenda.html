@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Agenda Rekomendasi</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    .modal-content {
+      margin: 5% auto;
+      padding: 20px;
+      border-radius: 10px;
+      max-width: 600px;
+    }
+
+    .close-rekomendasi {
+      float: right;
+      font-size: 24px;
+      cursor: pointer;
+    }
+
+    label {
+      display: block;
+      margin: 8px 0;
+    }
+
+    button {
+      margin-top: 10px;
+      padding: 10px 15px;
+      background-color: #607466;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    .result .place {
+      margin-top: 20px;
+      background: #f4f4f4;
+      padding: 10px;
+      border-radius: 10px;
+    }
+
+    .result img {
+      max-width: 100%;
+      border-radius: 10px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Modal Rekomendasi -->
+  <div id="rekomendasiModal">
+    <div class="modal-content">
+      <h3>Pilih kegiatan wisata yang kamu suka:</h3>
+      <form id="quizForm">
+        <label><input type="checkbox" name="kegiatan" value="camping" /> Camping & Outbond</label>
+        <label><input type="checkbox" name="kegiatan" value="trekking" /> Trekking & Hikking</label>
+        <label><input type="checkbox" name="kegiatan" value="berenang" /> Berenang / Air Terjun</label>
+        <label><input type="checkbox" name="kegiatan" value="sepeda" /> Bersepeda / Trail Adventure</label>
+        <label><input type="checkbox" name="kegiatan" value="edukasi" /> Edukasi Flora, Fauna, Budaya</label>
+        <label><input type="checkbox" name="kegiatan" value="foto" /> Spot Foto Menarik</label>
+        <label><input type="checkbox" name="kegiatan" value="religi" /> Wisata Religi / Ziarah</label><br>
+        <button type="submit">Cek Rekomendasi</button>
+      </form>
+
+      <div id="result" class="result"></div>
+    </div>
+  </div>
+
+  <script>
+    const kegiatanKeywords = {
+      camping: ['camping', 'outbond'],
+      trekking: ['trekking', 'hikking', 'mendaki'],
+      berenang: ['berenang', 'air terjun'],
+      sepeda: ['sepeda', 'trail'],
+      edukasi: ['edukasi', 'flora', 'fauna', 'budaya'],
+      foto: ['foto', 'hunting'],
+      religi: ['religi', 'ziarah']
+    };
+
+    async function loadData() {
+      const res = await fetch('data.json');
+      return await res.json();
+    }
+
+    function getCheckedValues(name) {
+      return Array.from(document.querySelectorAll(`input[name="${name}"]:checked`)).map(el => el.value);
+    }
+
+    function filterPlaces(data, selectedKegiatan) {
+      return data.filter(place => {
+        return selectedKegiatan.some(sel => {
+          const keywords = kegiatanKeywords[sel.toLowerCase()];
+          return place.kegiatan.some(keg =>
+            keywords.some(keyword => keg.toLowerCase().includes(keyword))
+          );
+        });
+      });
+    }
+
+    function showResults(places) {
+      const resultDiv = document.getElementById('result');
+      resultDiv.innerHTML = '';
+
+      if (places.length === 0) {
+        resultDiv.innerHTML = '<p>Tidak ada hasil yang cocok dengan pilihan kamu.</p>';
+        return;
+      }
+
+      places.forEach(place => {
+        const div = document.createElement('div');
+        div.classList.add('place');
+        div.innerHTML = `
+          <h4>${place.nama}</h4>
+          <img src="${place.image1}" alt="${place.nama}" />
+          <p>${place.deskripsi}</p>
+          <p><b>Rating:</b> ${place.rating} ⭐</p>
+          <a href="${place.link}" target="_blank"><button>Lihat Lokasi</button></a>
+        `;
+        resultDiv.appendChild(div);
+      });
+    }
+
+    loadData().then(data => {
+      document.getElementById('quizForm').addEventListener('submit', function (e) {
+        e.preventDefault();
+        const selectedKegiatan = getCheckedValues('kegiatan');
+        if (selectedKegiatan.length === 0) {
+          alert("Pilih minimal satu kegiatan ya!");
+          return;
+        }
+        const filtered = filterPlaces(data, selectedKegiatan);
+        showResults(filtered);
+      });
+    });
+    
+  </script>
+
+</body>
+
+</html>
