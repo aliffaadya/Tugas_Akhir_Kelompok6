@@ -7,12 +7,11 @@
   <title>Tilik Banua</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
   <script type="module">
-    // Import SDK dari Firebase CDN
+    // Import Firebase SDK
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
     import { getDatabase, ref, push, set, onValue, remove, update, get } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
-    import { getStorage, ref as storageRef, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-storage.js";
 
-    // Konfigurasi Firebase
+    // Firebase config
     const firebaseConfig = {
       apiKey: "AIzaSyAfPsAf-T24KLuyKGPQ1pyYUc0Vs-OEv90",
       authDomain: "tilik-banua.firebaseapp.com",
@@ -26,56 +25,53 @@
 
     const app = initializeApp(firebaseConfig);
     const db = getDatabase(app);
-    const storage = getStorage(app);
     const wisataRef = ref(db, "destinasi_baru");
 
     let idEdit = null;
 
-    // Fungsi Simpan / Update
+    // Simpan data
     document.getElementById("simpanBtn").addEventListener("click", async () => {
-      const nama = document.getElementById("nama").value;
-      const alamat = document.getElementById("alamat").value;
-      const deskripsi = document.getElementById("deskripsi").value;
-       "";
+      const nama = document.getElementById("nama").value.trim();
+      const alamat = document.getElementById("alamat").value.trim();
+      const deskripsi = document.getElementById("deskripsi").value.trim();
+
+      if (!nama || !alamat || !deskripsi) {
+        alert("Semua field wajib diisi.");
+        return;
+      }
 
       try {
-        if (file) {
-          const imgPath = `gambar_wisata/${Date.now()}_${file.name}`;
-          const imgRef = storageRef(storage, imgPath);
-          await uploadBytes(imgRef, file);
-          imageUrl = await getDownloadURL(imgRef);
-        }
-
         if (idEdit) {
-          // MODE UPDATE
+          // UPDATE MODE
           const itemRef = ref(db, `destinasi_baru/${idEdit}`);
-          const updateData = { nama, alamat, deskripsi, biaya, jam, kegiatan, rating, link };
-          if (imageUrl) updateData.imageUrl = imageUrl;
-          await update(itemRef, updateData);
+          await update(itemRef, { nama, alamat, deskripsi });
           alert("Data berhasil diperbarui!");
           idEdit = null;
           document.getElementById("simpanBtn").textContent = "Simpan";
         } else {
-          // MODE TAMBAH
+          // TAMBAH MODE
           const newRef = push(wisataRef);
           await set(newRef, {
-            nama, alamat, deskripsi, biaya, jam, kegiatan, rating, link, imageUrl,
+            nama,
+            alamat,
+            deskripsi,
             createdAt: new Date().toISOString()
           });
-          alert("Permintaan Anda akan segera diproses!");
+          alert("Permintaan Anda Sedang Diproses!");
         }
 
-        // Reset Form
-        ["nama", "alamat", "deskripsi"]
-          .forEach(id => document.getElementById(id).value = "");
+        // Reset form
+        ["nama", "alamat", "deskripsi"].forEach(id => {
+          document.getElementById(id).value = "";
+        });
 
       } catch (err) {
         console.error("Gagal simpan:", err);
-        alert("Gagal menyimpan data.");
+        alert("Terjadi kesalahan saat menyimpan data.");
       }
     });
 
-    // Tampilkan daftar wisata
+    // Tampilkan daftar data
     function tampilDaftar() {
       onValue(wisataRef, snapshot => {
         const data = snapshot.val();
@@ -94,13 +90,13 @@
             </li>
           `;
           });
-        } 
+        }
       });
     }
 
     tampilDaftar();
 
-    // Fungsi Edit
+    // Edit data
     window.editWisata = async function (id) {
       const itemRef = ref(db, `destinasi_baru/${id}`);
       const snapshot = await get(itemRef);
@@ -110,13 +106,12 @@
       document.getElementById("nama").value = data.nama;
       document.getElementById("alamat").value = data.alamat;
       document.getElementById("deskripsi").value = data.deskripsi;
-  
 
       idEdit = id;
       document.getElementById("simpanBtn").textContent = "Update";
     };
 
-    // Fungsi Hapus
+    // Hapus data
     window.deleteWisata = async function (id) {
       const itemRef = ref(db, `destinasi_baru/${id}`);
       if (confirm("Yakin ingin menghapus data ini?")) {
@@ -124,6 +119,7 @@
       }
     };
   </script>
+
 
 
   <style>
@@ -148,7 +144,7 @@
       top: 0;
       left: 0;
       width: 100%;
-      height: 106.6%;
+      height: 106.7%;
       opacity: 0.85;
       z-index: -1
     }
@@ -490,8 +486,6 @@
       <div id="info"><em>Klik lokasi pada peta untuk melihat informasi lokasi wisata.</em></div>
     </section>
 
-
-
     <br>
     <br>
     <br>
@@ -501,12 +495,8 @@
       <h2>Tambah Destinasi Baru</h2>
 
       <input id="nama" placeholder="Nama Tempat Wisata" required />
-
-      <input id="alamat" placeholder="Alamat Lengkap (Contoh: Cempaka, Mandi Angin Barat, Kec. Karang Intan...)"
-        required />
-
+      <input id="alamat" placeholder="Alamat Lengkap" required />
       <textarea id="deskripsi" placeholder="Deskripsi Singkat" rows="4" required></textarea>
-
 
       <br><br>
       <button id="simpanBtn">Simpan</button>
@@ -761,8 +751,7 @@
         <a href="detail_KiramPark.html"> 
           <button>Read More</button>
         </a>
-        `,
-
+        `
       };
       document.getElementById('info').innerHTML = deskripsi[nama] || "Informasi tidak ditemukan.";
     }
